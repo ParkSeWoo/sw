@@ -1,0 +1,188 @@
+import com.sun.corba.se.spi.orbutil.closure.Closure
+/**
+ * 작업자   : doldol
+ * 작업날짜 : 2016.12.13
+ */
+
+apply plugin: 'base'
+
+group 'com.nhis.api'
+
+//외부 에서
+buildscript {
+
+    ext {
+        springCloudVersion = 'Brixton.SR6'
+        springBootVersion = '1.4.2.RELEASE'
+        springDependencyVersion = '0.5.1.RELEASE'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+
+        maven { url 'http://repo.springsource.org/plugins-release'}
+        maven { url 'http://repo.spring.io/milestone'}
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyVersion}")
+
+    }
+}
+
+//전체 프로젝트 적용
+allprojects {
+    version = "0.1.0"
+}
+
+//서브 프로젝트 적용
+subprojects { subprojects ->
+
+    apply plugin: 'groovy'
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'war'
+    apply plugin: 'idea'
+    apply plugin: 'io.spring.dependency-management'
+
+    targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+
+    //인코딩 모두 적용
+    def defaultEncoding = 'UTF-8'
+
+    //AbstractCompile 모든 JVM을 통한 컴파일일 경우
+    //하위로는 GroovyCompile   JavaCompile   AbstractScalaCompile
+    tasks.withType(AbstractCompile).each {
+        it.options.encoding = defaultEncoding
+    }
+
+    javadoc {
+        options.encoding = defaultEncoding
+    }
+
+    springBoot {
+        executable = true
+    }
+
+    repositories {
+        jcenter()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
+        }
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok:1.16.8"
+        compile "org.springframework.cloud:spring-cloud-starter-eureka"
+        compile "org.springframework.cloud:spring-cloud-starter-feign"
+        compile "org.springframework.cloud:spring-cloud-starter-sleuth"
+        compile "org.springframework.boot:spring-boot-starter-actuator"
+        compile "org.springframework.boot:spring-boot-starter-security"
+        //compile "org.springframework.boot:spring-boot-starter-oauth2"
+        compile "org.springframework.boot:spring-boot-starter-aop"
+        compile "org.springframework.boot:spring-boot-starter-cache"
+        compile "org.springframework.boot:spring-boot-starter-data-jpa"
+        compile "org.springframework.boot:spring-boot-starter-web"
+        compile "org.hibernate:hibernate-java8"
+        compile "org.ehcache:ehcache:3.1.+"
+        compile "javax.cache:cache-api:1.0.0"
+        compile "com.zaxxer:HikariCP:2.4.+"
+        compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.8.+"
+        compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.+"
+        compile "commons-io:commons-io:2.5"
+        compile "org.apache.commons:commons-lang3:3.4"
+        compile "com.ibm.icu:icu4j:57.1"
+        compile "org.jolokia:jolokia-core:1.3.3"
+        compile fileTree(dir: 'libs', includes: ['*.jar'])
+        runtime "com.h2database:h2:1.4.+"
+        testCompileOnly "org.projectlombok:lombok:1.16.8"
+        testCompile "org.springframework.boot:spring-boot-starter-test"
+    }
+
+}
+
+project(':rest_api') {
+    dependencies {
+        compile project(':comm_core')
+    }
+}                       
+
+/*repositories {
+    mavenCentral()
+    jcenter()
+
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}*/
+
+
+
+//==================== 별도의 실행이 필요한 task 시작 ====================
+
+// 하위 디렉토리 생성 eclipse 일경우만 실행 합니다
+task initSrc << {
+    project.sourceSets*.allSource.srcDirTrees.flatten().dir.each { dir ->
+        dir.mkdirs()
+    }
+}
+
+// javadoc 생성 설정
+task docJava(type: Javadoc) {
+    source subprojects.collect {project ->
+        project.sourceSets.main.allJava
+    }
+    destinationDir = new File(buildDir, 'javadoc')
+
+    println "buildDir => ["+buildDir+ "]"
+
+    //classpath
+    classpath = files(subprojects.collect {project ->
+        project.sourceSets.main.compileClasspath
+    })
+
+    println " ------------------ javadoc end ------------------"
+
+}
+
+//tasks.eclipse.dependsOn(initSrc)
+
+
+//Wrapper 3.2.1 버전 설치
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.2.1"
+}
+//==================== 별도의 실행이 필요한 task 종료 ====================
+
+/* 테스트 시작 */
+/*
+Closure cl = { task -> println "I'm $task.project.name"}
+
+task hello << cl
+
+project(':common') {
+    task hello << cl
+}
+
+subprojects {
+    hello << { pri           ntln "   - | depend on com.nhis.api"}
+}
+*/
+
+//project('common').hello << {
+//    println " common 프로젝트에서만 실행되게 테스트 "
+//}
+
+
+/* 테스트 종료 */
