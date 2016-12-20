@@ -12,11 +12,16 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * </p>
  */
 
-@SpringBootApplication(scanBasePackages={""}) //scanBasePackageClasses
+@SpringBootApplication(scanBasePackages={ApiApp.APP_BASE_PAKAGE}) //scanBasePackageClasses
 public class ApiApp {
+
+	public static final String APP_BASE_PAKAGE = "com.nhis.api";
+
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(ApiApp.class)
 				.profiles("app")
 				.run(args);
+
+
 	}
 }

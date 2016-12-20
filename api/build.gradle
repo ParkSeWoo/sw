@@ -60,8 +60,9 @@ subprojects { subprojects ->
         it.options.encoding = defaultEncoding
     }
 
-    javadoc {
-        options.encoding = defaultEncoding
+    tasks.withType(Javadoc) { Javadoc javadoc ->
+        javadoc.options.encoding = defaultEncoding
+        javadoc.options.addStringOption('Xdoclint:all,-missing', '-quiet')
     }
 
     springBoot {

@@ -8,15 +8,14 @@ public enum PathEnum {
 	COMM_PATH("com.nhis.comm")
 	;
 
-	private final String paths;
+	private final String packageNm;
 
 	//construct
-	PathEnum(String cho) {
-		paths = cho;
+	PathEnum(String packageNm) {
+		this.packageNm = packageNm;
 	}
 
-	public String getSpan() {
-		return paths;
+	public String getPackageNm() {
+		return this.packageNm;
 	}
-
 }
