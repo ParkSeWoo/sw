@@ -1,8 +1,10 @@
 package com.nhis.api;
 
-import com.nhis.comm.context.enums.PathEnum;
+import com.nhis.comm.context.paths.PathFactory;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Created by sewoo on 2016. 12. 16..
@@ -12,16 +14,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * </p>
  */
 
-@SpringBootApplication(scanBasePackages={ApiApp.APP_BASE_PAKAGE}) //scanBasePackageClasses
+@EnableAutoConfiguration
+@EnableTransactionManagement
+@SpringBootApplication(scanBasePackages={PathFactory.MAIN_PATH}) //scanBasePackageClasses
 public class ApiApp {
-
-	public static final String APP_BASE_PAKAGE = "com.nhis.api";
 
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(ApiApp.class)
 				.profiles("app")
 				.run(args);
-
 
 	}
 }

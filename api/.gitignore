@@ -11,10 +11,10 @@
 #.springBeans
 #
 #### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+#.idea
+#*.iws
+#*.iml
+#*.ipr
 #
 #### NetBeans ###
 #nbproject/private/
@@ -25,12 +25,14 @@
 #.nb-gradle/
 
 
-#*
-#!.gitignore
-#!src/
-#!src/*
-#!./comm_core
-#!./rest_api
-#!build.gradle
-#!settings.gradle
+*
+!.gitignore
+!src/
+!src/*
+!comm_core
+!comm_core/*
+!rest_api
+!rest_api/*
+!build.gradle
+!settings.gradle
 
