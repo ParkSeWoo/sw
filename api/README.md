@@ -16,4 +16,14 @@
    
    
    omnicns 사업본부    헬스케어1팀 장동환 대리
-
+   
+   
+   ---------
+   
+   구조 
+   
+   api
+   
+   
+    |--- comm_core : 공통 
+    |--- rest_api  : api rest
