@@ -17,6 +17,7 @@ public class ApplicationConfig {
 
 	/**
 	 * spring mvc의 확장 구성
+	 *
 	 */
 	@Configuration
 	static class WebMvcConfig extends WebMvcConfigurerAdapter {

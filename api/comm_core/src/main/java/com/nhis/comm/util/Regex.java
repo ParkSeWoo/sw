@@ -7,7 +7,7 @@ package com.nhis.comm.util;
  */
 public interface Regex {
 	/** Ascii */
-	String rAscii = "^\\p{ASCII}*$";
+	String statrAscii = "^\\p{ASCII}*$";
 	/** 문자 */
 	String rAlpha = "^[a-zA-Z]*$";
 	/** 알파벳 대문자 */

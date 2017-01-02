@@ -7,6 +7,11 @@ import java.util.function.Supplier;
 
 /**
  * Created by doldol on 2016. 12. 27..
+ *
+ *  REST에 대한 예외 처리를 할 Controller.
+ *  <p> application.yml의 "error.path"속성의 조합으로 사용합니다.
+ *  아울러 "error.whitelabel.enabled : false"를 whitelabel을 무효화해야합니다.
+ *  see ErrorMvcAutoConfiguration
  */
 public class RestExporterSupport {
 

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -16,6 +17,8 @@ import java.util.Map;
 /**
  * Created by sewoo on 2016. 12. 27..
  */
+
+@RestController
 public class RestErrorController implements ErrorController {
 
 	@Autowired(required = false)
