@@ -35,4 +35,5 @@
 !rest_api/*
 !build.gradle
 !settings.gradle
+!gradle.properties
 

@@ -1,6 +1,6 @@
 rootProject.name = 'com.nhis.api'
 
-String [] modules = ['comm_core','rest_api']
+String [] modules = ['comm_core','rest_api','rest_oauth2']
 include modules
 
 // root directory에 하위 modules에 설정된 값들 디렉토리 만들기

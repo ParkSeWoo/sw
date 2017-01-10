@@ -6,8 +6,9 @@ package com.nhis.comm.util;
  * <p> Checker.match와 함께 이용하십시오.
  */
 public interface Regex {
+
 	/** Ascii */
-	String statrAscii = "^\\p{ASCII}*$";
+	String rAscii = "^\\p{ASCII}*$";
 	/** 문자 */
 	String rAlpha = "^[a-zA-Z]*$";
 	/** 알파벳 대문자 */

@@ -87,7 +87,8 @@ subprojects { subprojects ->
         compile "org.springframework.cloud:spring-cloud-starter-sleuth"
         compile "org.springframework.boot:spring-boot-starter-actuator"
         compile "org.springframework.boot:spring-boot-starter-security"
-        //compile "org.springframework.boot:spring-boot-starter-oauth2"
+        compile "org.springframework.security.oauth:spring-security-oauth2" //oauth2
+        compile 'org.springframework.security:spring-security-jwt'          //token
         compile "org.springframework.boot:spring-boot-starter-aop"
         compile "org.springframework.boot:spring-boot-starter-cache"
         compile "org.springframework.boot:spring-boot-starter-data-jpa"
@@ -107,14 +108,22 @@ subprojects { subprojects ->
         testCompileOnly "org.projectlombok:lombok:1.16.8"
         testCompile "org.springframework.boot:spring-boot-starter-test"
     }
-
 }
 
 project(':rest_api') {
     dependencies {
         compile project(':comm_core')
+        compile 'org.springframework.data:spring-data-rest-hal-browser' //tools
+        compile('org.springframework.boot:spring-boot-starter-data-rest') //rest http method to automatic generation
     }
-}                       
+}
+
+project(':rest_oauth2') {
+    dependencies {
+        compile project(':comm_core')
+
+    }
+}
 
 /*repositories {
     mavenCentral()
@@ -127,8 +136,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }*/
-
-
 
 //==================== 별도의 실행이 필요한 task 시작 ====================
 
