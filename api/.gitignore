@@ -24,7 +24,6 @@
 #nbdist/
 #.nb-gradle/
 
-
 *
 !.gitignore
 !src/
@@ -33,6 +32,8 @@
 !comm_core/*
 !rest_api
 !rest_api/*
+!rest_oauth2
+!rest_oauth2/*
 !build.gradle
 !settings.gradle
 !gradle.properties
