@@ -1,0 +1,40 @@
+#.gradle
+#/build/
+#!gradle/wrapper/gradle-wrapper.jar
+#
+#### STS ###
+#.apt_generated
+#.classpath
+#.factorypath
+#.project
+#.settings
+#.springBeans
+#
+#### IntelliJ IDEA ###
+#.idea
+#*.iws
+#*.iml
+#*.ipr
+#
+#### NetBeans ###
+#nbproject/private/
+#build/
+#nbbuild/
+#dist/
+#nbdist/
+#.nb-gradle/
+
+*
+!.gitignore
+!src/
+!src/*
+!comm_core
+!comm_core/*
+!rest_api
+!rest_api/*
+!rest_oauth2
+!rest_oauth2/*
+!build.gradle
+!settings.gradle
+!gradle.properties
+
