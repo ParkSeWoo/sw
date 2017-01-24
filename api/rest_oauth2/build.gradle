@@ -1,0 +1,3 @@
+bootRepackage {
+    mainClass = 'com.nhis.oauth2.OAuth2App'
+}
